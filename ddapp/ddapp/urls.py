@@ -18,11 +18,15 @@ from django.conf.urls import include, url
 from django.contrib import admin
 admin.autodiscover()
 from ddapp import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
    url(r'^$', views.home, name='home'),
+   url(r'^login/$', auth_views.login, name='login'),
+   url(r'^logout/$', auth_views.logout, name='logout'),
    url(r'^admin/', include(admin.site.urls)),
-   url('', include('social_django.urls', namespace='social')),
-   url('', include('django.contrib.auth.urls', namespace='auth')),
+   # url('', include('social_django.urls', namespace='social')),
+   url(r'^oauth/', include('social_django.urls', namespace='social')),
+   # url('', include('django.contrib.auth.urls', namespace='auth')),
 
 ]
